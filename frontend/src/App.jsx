@@ -89,7 +89,7 @@ function App() {
           ) : (
             <div className="placeholder">
               <h3>Welcome to AI Code Reviewer</h3>
-              <p>Write your JavaScript code in the editor and click "Review Code" to get AI-powered feedback on:</p>
+              <p>Write your code in the editor and click "Review Code" to get AI-powered feedback on:</p>
               <ul>
                 <li>Code quality and best practices</li>
                 <li>Potential bugs and issues</li>

@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: ai-code-reviewer-backend
+    env: node
+    plan: free
+    buildCommand: cd Backend && npm install
+    startCommand: cd Backend && node server.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: GOOGLE_GEMINI_KEY
+        value: AIzaSyAfAz71jyjqj9dKgeXYUAUrgcJy4B26jtA
