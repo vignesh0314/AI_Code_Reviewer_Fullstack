@@ -1,17 +1,31 @@
-// require('dotenv').config()
-// const app = require('./src/app')
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
 
+dotenv.config();
 
+const app = express();
 
-// app.listen(3000, () => {
-//     console.log('sever is running on : http://localhost:3000/')
-// })
+app.use(express.json());
 
-require('dotenv').config()
-const app = require('./src/app')
+app.use(cors({
+    origin: [
+        "http://localhost:5173",
+        process.env.CLIENT_URL
+    ],
+    credentials: true
+}));
 
-const PORT = process.env.PORT || 3000;
+app.get("/", (req, res) => {
+    res.send("API is running...");
+});
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server is running on port: ${PORT}`)
-})
+app.get("/api/test", (req, res) => {
+    res.json({ message: "Backend working" });
+});
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});

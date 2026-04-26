@@ -17,13 +17,21 @@ body,
 /* Header Styles */
 .heading {
   text-align: center;
-  padding: 2rem 0;
+  padding: 1.2rem 0 1rem;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%);
   color: white;
   margin-bottom: 0;
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
   position: relative;
   overflow: hidden;
+}
+
+.heading-sub {
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.75);
+  margin: 0.3rem 0 0;
+  font-weight: 400;
+  letter-spacing: 0.3px;
 }
 
 .heading::before {
@@ -43,7 +51,7 @@ body,
 }
 
 .heading h1 {
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: 800;
   margin: 0;
   text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
@@ -64,11 +72,11 @@ body,
 
 /* Main Layout */
 main {
-  height: calc(100vh - 120px);
+  height: calc(100vh - 100px);
   width: 100%;
-  padding: 2rem;
+  padding: 1.5rem;
   display: flex;
-  gap: 2rem;
+  gap: 1.5rem;
   background: #0f0f0f;
   overflow: hidden;
 }
@@ -90,7 +98,7 @@ main .right:hover {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* Left Panel - Code Editor - FIXED SCROLLING */
+/* Left Panel - Code Editor */
 main .left {
   background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
   position: relative;
@@ -99,14 +107,55 @@ main .left {
   overflow: hidden;
 }
 
+/* Toolbar above editor */
+.left-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1rem;
+  background: #111;
+  border-bottom: 1px solid #2a2a2a;
+  flex-shrink: 0;
+}
+
+.toolbar-label {
+  font-size: 0.8rem;
+  color: #888;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.lang-select {
+  background: #1e1e1e;
+  color: #e0e0e0;
+  border: 1px solid #333;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.lang-select:hover,
+.lang-select:focus {
+  border-color: #667eea;
+}
+
+.char-count {
+  margin-left: auto;
+  font-size: 0.75rem;
+  color: #555;
+}
+
 .left .code {
-  height: 100%;
   width: 100%;
-  border-radius: 1rem;
   background: #0a0a0a;
   overflow: hidden;
   flex: 1;
   position: relative;
+  min-height: 0;
 }
 
 /* CodeMirror Customization - GUARANTEED SCROLLBARS */
@@ -212,7 +261,7 @@ main .left {
   min-height: calc(100% + 100px) !important;
 }
 
-/* New Review Button Styles */
+/* Review Button Styles */
 .review-btn {
   --border-color: linear-gradient(-45deg, #ffae00, #7e03aa, #00fffb);
   --border-width: 0.125em;
@@ -223,13 +272,13 @@ main .left {
   color: var(--color);
   cursor: pointer;
   position: absolute;
-  bottom: 1.5rem;
-  right: 1.5rem;
+  bottom: 1.2rem;
+  right: 1.2rem;
   isolation: isolate;
   display: inline-grid;
   place-content: center;
-  padding: 0.8em 2em;
-  font-size: 16px;
+  padding: 0.75em 1.8em;
+  font-size: 14px;
   border: 0;
   text-transform: uppercase;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.6);
@@ -245,8 +294,8 @@ main .left {
   font-weight: 600;
   letter-spacing: 0.5px;
   z-index: 10;
-  min-width: 160px;
-  min-height: 50px;
+  min-width: 150px;
+  min-height: 46px;
 }
 
 .review-btn::after,
@@ -398,11 +447,77 @@ main .left {
 /* Right Panel - Output */
 main .right {
   background: linear-gradient(145deg, #1e1e1e, #151515);
-  padding: 2rem;
-  font-size: 1rem;
+  padding: 1.5rem;
+  font-size: 0.95rem;
   overflow: auto;
   color: #e0e0e0;
   position: relative;
+}
+
+/* Error Banner */
+.error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  background: rgba(220, 53, 69, 0.12);
+  border: 1px solid rgba(220, 53, 69, 0.35);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  color: #ff6b6b;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  animation: fadeIn 0.3s ease;
+}
+
+.error-icon {
+  flex-shrink: 0;
+  font-size: 1.1rem;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Review header bar */
+.review-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.2rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+.review-badge {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #4ade80;
+  background: rgba(74, 222, 128, 0.1);
+  border: 1px solid rgba(74, 222, 128, 0.25);
+  border-radius: 20px;
+  padding: 0.3rem 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  background: rgba(102, 126, 234, 0.12);
+  border: 1px solid rgba(102, 126, 234, 0.3);
+  color: #667eea;
+  border-radius: 6px;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.copy-btn:hover {
+  background: rgba(102, 126, 234, 0.25);
+  border-color: #667eea;
+  color: #fff;
 }
 
 /* Loading State */
@@ -432,31 +547,44 @@ main .right {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.placeholder-icon {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-10px); }
 }
 
 .placeholder h3 {
   color: #667eea;
-  font-size: 1.8rem;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .placeholder p {
   color: #b0b0b0;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.2rem;
   line-height: 1.6;
-  text-align: center;
+  max-width: 380px;
 }
 
 .placeholder ul {
   color: #b0b0b0;
   line-height: 1.8;
-  max-width: 500px;
-  margin: 0 auto;
+  text-align: left;
+  list-style: none;
+  padding: 0;
 }
 
 .placeholder li {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.4rem;
   position: relative;
   padding-left: 1.5rem;
 }
@@ -616,7 +744,7 @@ main .right {
   }
 }
 
-/* Test content to ensure scrolling works */
+/* Ensure editor fills flex container */
 .cm-editor .cm-content {
-  min-height: 150% !important; /* Force scrollable content */
+  min-height: 100% !important;
 }
